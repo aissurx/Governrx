@@ -1480,7 +1480,7 @@ Inquire
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-6xl mx-auto px-4 md:px-24 pb-16 md:pb-32 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-6xl mx-auto px-4 md:px-24 py-16 md:py-32 items-center">
             <div className="p-6 md:p-8 border border-white/10 rounded-xl bg-zinc-950/50">
               <h3 className="text-xl md:text-2xl font-serif font-bold mb-4 md:mb-6">Global Headquarters</h3>
               <div className="space-y-4 font-mono text-xs md:text-sm text-gray-400">

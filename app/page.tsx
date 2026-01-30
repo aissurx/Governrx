@@ -377,12 +377,12 @@ const GovernRxApp = () => {
     e.preventDefault()
     setFormSubmitting(true)
 
-    // Create mailto link to send email to compliance@governrx.com
+    // Create mailto link to send email to guardrails@governrx.com
     const subject = encodeURIComponent(`New Inquiry from ${contactForm.name}`)
     const body = encodeURIComponent(
       `Name: ${contactForm.name}\nEmail: ${contactForm.email}\n\nInquiry:\n${contactForm.inquiry}`,
     )
-    const mailtoLink = `mailto:compliance@governrx.com?subject=${subject}&body=${body}`
+    const mailtoLink = `mailto:guardrails@governrx.com?subject=${subject}&body=${body}`
 
     // Open email client
     window.location.href = mailtoLink
@@ -1496,7 +1496,7 @@ Inquire
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail size={18} className="text-red-600" />
-                  <p>compliance@governrx.com</p>
+                  <p>guardrails@governrx.com</p>
                 </div>
               </div>
             </div>

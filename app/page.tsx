@@ -452,7 +452,7 @@ const GovernRxApp = () => {
             onClick={() => navigate("home")}
             className="text-xl md:text-2xl font-bold tracking-tighter font-serif flex items-center gap-2 md:gap-4 cursor-pointer"
           >
-            <CustomLogo className="w-8 h-8 md:w-10 md:h-10 text-white flex-shrink-0" />
+            <CustomLogo className="w-7 h-7 md:w-8 md:h-8 text-white flex-shrink-0" />
             <span ref={logoTextRef} className="transition-all duration-500 ease-out inline-block whitespace-nowrap">
               GOVERNRX
             </span>
@@ -1570,7 +1570,7 @@ Inquire
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-center border-b border-white/5 pb-6 md:pb-8 mb-6 md:mb-8 gap-4 md:gap-0">
             <div className="text-2xl md:text-4xl font-serif font-bold flex items-center gap-3 md:gap-4 opacity-90">
-              <CustomLogo className="w-8 h-8 md:w-10 md:h-10" />
+              <CustomLogo className="w-7 h-7 md:w-8 md:h-8" />
               GOVERNRX
             </div>
             <nav className="flex flex-wrap justify-center gap-4 md:gap-6 opacity-80">

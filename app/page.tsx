@@ -451,7 +451,7 @@ const GovernRxApp = () => {
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between pointer-events-auto">
           <div
             onClick={() => navigate("home")}
-            className="text-xl md:text-2xl font-bold tracking-tighter font-serif flex items-center gap-1 md:gap-2 cursor-pointer"
+            className="text-xl md:text-2xl font-bold tracking-tighter font-serif flex items-center gap-0 cursor-pointer"
           >
             <CustomLogo className="w-12 h-12 md:w-14 md:h-14 text-white flex-shrink-0" />
             <span ref={logoTextRef} className="transition-all duration-500 ease-out inline-block whitespace-nowrap">
@@ -1570,7 +1570,7 @@ Inquire
       <footer className="relative z-10 text-white bg-black p-4 md:p-6 lg:p-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-center border-b border-white/5 pb-6 md:pb-8 mb-6 md:mb-8 gap-4 md:gap-0">
-            <div className="text-2xl md:text-4xl font-serif font-bold flex items-center gap-1 md:gap-2 opacity-90">
+            <div className="text-2xl md:text-4xl font-serif font-bold flex items-center gap-0 opacity-90">
               <CustomLogo className="w-12 h-12 md:w-14 md:h-14" />
               GOVERNRX
             </div>

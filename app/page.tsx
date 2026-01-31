@@ -23,13 +23,43 @@ interface CustomLogoProps {
   className?: string
 }
 
-// --- Custom Logo Component (Guardian Node) ---
+// --- Custom Logo Component (Geometric G) ---
 const CustomLogo = ({ className }: CustomLogoProps) => (
   <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-    {/* Architectural 'A' / Guardian Node */}
-    <path d="M50 2L15 90H35L50 50L65 90H85L50 2Z" fill="currentColor" />
-    <circle cx="50" cy="65" r="8" fill="red" />
-    <rect x="48" y="20" width="4" height="25" fill="black" />
+    {/* Geometric G - Concentric diamond shapes */}
+    {/* Outer diamond */}
+    <path 
+      d="M50 5 L95 50 L50 95 L5 50 Z" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="4"
+    />
+    {/* Middle diamond */}
+    <path 
+      d="M50 20 L80 50 L50 80 L20 50 Z" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="4"
+    />
+    {/* Inner diamond with G cutout effect */}
+    <path 
+      d="M50 35 L65 50 L50 65 L35 50 Z" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="4"
+    />
+    {/* G shape accent - horizontal line extending right */}
+    <path 
+      d="M50 50 L80 50" 
+      stroke="currentColor" 
+      strokeWidth="4"
+    />
+    {/* Upper right accent for G */}
+    <path 
+      d="M65 35 L80 20" 
+      stroke="currentColor" 
+      strokeWidth="4"
+    />
   </svg>
 )
 

@@ -1,3 +1,4 @@
+import React from "react"
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -11,10 +12,9 @@ export const metadata: Metadata = {
   description:'Govern Intelligence',
   icons: {
     icon: [
-
       {
-        url: '/aissurx-logo.svg',
-        type: 'image/svg+xml',
+        url: '/logo.png',
+        type: 'image/png',
       },
     ],
     apple: '/apple-icon.png',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "GovernRx",
     images: [
       {
-        url: "/aissurx-logo.svg", 
+        url: "/og-image.png", 
         alt: "GovernRx",
       },
     ],

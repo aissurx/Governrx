@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import {
   ArrowRight,
   Globe,
@@ -23,14 +24,16 @@ interface CustomLogoProps {
   className?: string
 }
 
-// --- Custom Logo Component (Guardian Node) ---
+// --- Custom Logo Component (Using PNG Image) ---
 const CustomLogo = ({ className }: CustomLogoProps) => (
-  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-    {/* Architectural 'A' / Guardian Node */}
-    <path d="M50 2L15 90H35L50 50L65 90H85L50 2Z" fill="currentColor" />
-    <circle cx="50" cy="65" r="8" fill="red" />
-    <rect x="48" y="20" width="4" height="25" fill="black" />
-  </svg>
+  <Image
+    src="/logo.png"
+    alt="GovernRx Logo"
+    width={64}
+    height={64}
+    className={className}
+    style={{ objectFit: "contain" }}
+  />
 )
 
 // --- Visual Components ---
@@ -448,9 +451,9 @@ const GovernRxApp = () => {
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between pointer-events-auto">
           <div
             onClick={() => navigate("home")}
-            className="text-xl md:text-2xl font-bold tracking-tighter font-serif flex items-center gap-2 md:gap-4 cursor-pointer"
+            className="text-xl md:text-2xl font-bold tracking-tighter font-serif flex items-center gap-0 cursor-pointer"
           >
-            <CustomLogo className="w-8 h-8 md:w-10 md:h-10 text-white flex-shrink-0" />
+            <CustomLogo className="w-12 h-12 md:w-14 md:h-14 text-white flex-shrink-0" />
             <span ref={logoTextRef} className="transition-all duration-500 ease-out inline-block whitespace-nowrap">
               GOVERNRX
             </span>
@@ -1567,8 +1570,8 @@ Inquire
       <footer className="relative z-10 text-white bg-black p-4 md:p-6 lg:p-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-center border-b border-white/5 pb-6 md:pb-8 mb-6 md:mb-8 gap-4 md:gap-0">
-            <div className="text-2xl md:text-4xl font-serif font-bold flex items-center gap-3 md:gap-4 opacity-90">
-              <CustomLogo className="w-8 h-8 md:w-10 md:h-10" />
+            <div className="text-2xl md:text-4xl font-serif font-bold flex items-center gap-0 opacity-90">
+              <CustomLogo className="w-12 h-12 md:w-14 md:h-14" />
               GOVERNRX
             </div>
             <nav className="flex flex-wrap justify-center gap-4 md:gap-6 opacity-80">

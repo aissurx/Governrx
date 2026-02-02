@@ -320,6 +320,7 @@ const GovernRxApp = () => {
   // Splash screen states
   const [showSplash, setShowSplash] = useState(true)
   const [currentWord, setCurrentWord] = useState(0)
+  const [showDoors, setShowDoors] = useState(false)
   const [doorsOpen, setDoorsOpen] = useState(false)
   const [splashComplete, setSplashComplete] = useState(false)
   
@@ -349,19 +350,25 @@ const GovernRxApp = () => {
       setCurrentWord((prev) => (prev + 1) % cyclingWords.length)
     }, 2000)
 
-    // After 8 seconds (4 words x 2s), trigger door opening
+    // After 8 seconds (4 words x 2s), show doors first
+    const showDoorsTimer = setTimeout(() => {
+      setShowDoors(true)
+    }, 8000)
+
+    // After doors appear (0.5s), trigger door opening animation
     const doorTimer = setTimeout(() => {
       setDoorsOpen(true)
-    }, 8000)
+    }, 8500)
 
     // After doors open (1.5s animation), hide splash completely
     const completeTimer = setTimeout(() => {
       setSplashComplete(true)
       setShowSplash(false)
-    }, 9500)
+    }, 10000)
 
     return () => {
       clearInterval(wordInterval)
+      clearTimeout(showDoorsTimer)
       clearTimeout(doorTimer)
       clearTimeout(completeTimer)
     }
@@ -524,23 +531,27 @@ const GovernRxApp = () => {
             </p>
           </div>
 
-          {/* Door panels */}
-          <div 
-            className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center door-left ${doorsOpen ? 'door-open-left' : ''}`}
-            style={{ backgroundColor: '#4a3333' }}
-          >
-            <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
-              You
-            </span>
-          </div>
-          <div 
-            className={`absolute top-0 right-0 w-1/2 h-full flex items-center justify-center door-right ${doorsOpen ? 'door-open-right' : ''}`}
-            style={{ backgroundColor: '#4a3333' }}
-          >
-            <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
-              Can
-            </span>
-          </div>
+          {/* Door panels - only visible after word cycling completes */}
+          {showDoors && (
+            <>
+              <div 
+                className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center door-left ${doorsOpen ? 'door-open-left' : ''}`}
+                style={{ backgroundColor: '#4a3333' }}
+              >
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
+                  You
+                </span>
+              </div>
+              <div 
+                className={`absolute top-0 right-0 w-1/2 h-full flex items-center justify-center door-right ${doorsOpen ? 'door-open-right' : ''}`}
+                style={{ backgroundColor: '#4a3333' }}
+              >
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
+                  Can
+                </span>
+              </div>
+            </>
+          )}
         </div>
       )}
 

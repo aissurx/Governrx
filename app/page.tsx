@@ -345,26 +345,32 @@ const GovernRxApp = () => {
   useEffect(() => {
     if (!showSplash) return
 
-    // Cycle through words every 2 seconds
+    // Cycle through words every 2.2 seconds, stop at last word
+    let cycleCount = 0
     const wordInterval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % cyclingWords.length)
-    }, 2000)
+      cycleCount++
+      if (cycleCount < cyclingWords.length) {
+        setCurrentWord((prev) => prev + 1)
+      } else {
+        clearInterval(wordInterval)
+      }
+    }, 2200)
 
-    // After 8 seconds (4 words x 2s), show doors first
+    // After all 4 words cycle (4 x 2.2s = 8.8s) + pause at "Unchecked" (1.5s), show doors
     const showDoorsTimer = setTimeout(() => {
       setShowDoors(true)
-    }, 8000)
+    }, 10300)
 
-    // After doors appear (0.5s), trigger door opening animation
+    // After doors appear (0.3s), trigger door opening animation
     const doorTimer = setTimeout(() => {
       setDoorsOpen(true)
-    }, 8500)
+    }, 10600)
 
     // After doors open (1.5s animation), hide splash completely
     const completeTimer = setTimeout(() => {
       setSplashComplete(true)
       setShowSplash(false)
-    }, 10000)
+    }, 12100)
 
     return () => {
       clearInterval(wordInterval)
@@ -486,12 +492,12 @@ const GovernRxApp = () => {
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes wordFade {
-          0% { opacity: 0; transform: scale(0.9); }
-          10% { opacity: 1; transform: scale(1); }
-          90% { opacity: 1; transform: scale(1); }
-          100% { opacity: 0; transform: scale(1.1); }
+          0% { opacity: 0; transform: scale(0.95); }
+          15% { opacity: 1; transform: scale(1); }
+          85% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(1.02); }
         }
-        .word-cycle { animation: wordFade 2s ease-in-out; }
+        .word-cycle { animation: wordFade 2.2s ease-in-out; }
         .door-left {
           transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
         }

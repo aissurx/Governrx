@@ -524,35 +524,37 @@ const GovernRxApp = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px] opacity-30"></div>
           </div>
           
-          {/* Centered cycling words */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-            <h1 
-              key={currentWord}
-              className="text-5xl md:text-8xl lg:text-9xl font-serif font-bold text-white tracking-tighter word-cycle"
-            >
-              {cyclingWords[currentWord]}
-            </h1>
-            <p className="mt-6 md:mt-8 text-sm md:text-lg font-mono text-gray-400 tracking-wider uppercase text-center px-4">
-              AI Speed is Lethal without Governance
-            </p>
-          </div>
+          {/* Centered cycling words - hidden when doors appear */}
+          {!showDoors && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+              <h1 
+                key={currentWord}
+                className="text-5xl md:text-8xl lg:text-9xl font-serif font-bold text-white tracking-tighter word-cycle"
+              >
+                {cyclingWords[currentWord]}
+              </h1>
+              <p className="mt-6 md:mt-8 text-sm md:text-lg font-mono text-gray-400 tracking-wider uppercase text-center px-4">
+                AI Speed is Lethal without Governance
+              </p>
+            </div>
+          )}
 
           {/* Door panels - only visible after word cycling completes */}
           {showDoors && (
             <>
               <div 
                 className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center door-left ${doorsOpen ? 'door-open-left' : ''}`}
-                style={{ backgroundColor: '#4a3333' }}
+                style={{ backgroundColor: '#1a0a0a' }}
               >
-                <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white tracking-tighter">
                   You
                 </span>
               </div>
               <div 
                 className={`absolute top-0 right-0 w-1/2 h-full flex items-center justify-center door-right ${doorsOpen ? 'door-open-right' : ''}`}
-                style={{ backgroundColor: '#4a3333' }}
+                style={{ backgroundColor: '#1a0a0a' }}
               >
-                <span className="text-6xl md:text-9xl font-serif font-bold text-white/20 tracking-tighter">
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white tracking-tighter">
                   Can
                 </span>
               </div>

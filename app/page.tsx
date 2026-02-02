@@ -317,6 +317,15 @@ const GovernRxApp = () => {
   const logoTextRef = useRef(null)
   const heroRef = useRef(null)
 
+  // Splash screen states
+  const [showSplash, setShowSplash] = useState(true)
+  const [currentWord, setCurrentWord] = useState(0)
+  const [showDoors, setShowDoors] = useState(false)
+  const [doorsOpen, setDoorsOpen] = useState(false)
+  const [splashComplete, setSplashComplete] = useState(false)
+  
+  const cyclingWords = ["Unprepared", "Unsecured", "Ungoverned", "Unchecked"]
+
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -331,6 +340,45 @@ const GovernRxApp = () => {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
+
+  // Splash screen word cycling and door animation
+  useEffect(() => {
+    if (!showSplash) return
+
+    // Cycle through words every 2.5 seconds, stop at last word
+    let cycleCount = 0
+    const wordInterval = setInterval(() => {
+      cycleCount++
+      if (cycleCount < cyclingWords.length) {
+        setCurrentWord((prev) => prev + 1)
+      } else {
+        clearInterval(wordInterval)
+      }
+    }, 2500)
+
+    // After all 4 words cycle (4 x 2.5s = 10s) + pause at "Unchecked" (1.5s), show doors
+    const showDoorsTimer = setTimeout(() => {
+      setShowDoors(true)
+    }, 11500)
+
+    // After doors appear (0.3s), trigger door opening animation
+    const doorTimer = setTimeout(() => {
+      setDoorsOpen(true)
+    }, 11800)
+
+    // After doors open (1.5s animation), hide splash completely
+    const completeTimer = setTimeout(() => {
+      setSplashComplete(true)
+      setShowSplash(false)
+    }, 13300)
+
+    return () => {
+      clearInterval(wordInterval)
+      clearTimeout(showDoorsTimer)
+      clearTimeout(doorTimer)
+      clearTimeout(completeTimer)
+    }
+  }, [showSplash, cyclingWords.length])
 
   useEffect(() => {
     const cursor = cursorRef.current
@@ -437,6 +485,27 @@ const GovernRxApp = () => {
           .mobile-items-center { align-items: center !important; }
           .mobile-no-sticky { position: relative !important; top: auto !important; }
         }
+        
+        /* Splash screen animations */
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes wordFade {
+          0% { opacity: 0; transform: scale(0.95); }
+          15% { opacity: 1; transform: scale(1); }
+          85% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(1.02); }
+        }
+        .word-cycle { animation: wordFade 2.5s ease-in-out; }
+        .door-left {
+          transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .door-right {
+          transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .door-open-left { transform: translateX(-100%); }
+        .door-open-right { transform: translateX(100%); }
       `,
         }}
       />
@@ -446,6 +515,53 @@ const GovernRxApp = () => {
         className="fixed w-6 h-6 bg-red-600 rounded-full pointer-events-none z-[100] mix-blend-multiply hidden md:block top-0 left-0"
         style={{ willChange: "transform" }}
       ></div>
+
+      {/* Splash Screen */}
+      {showSplash && !splashComplete && (
+        <div className="fixed inset-0 z-[200] overflow-hidden">
+          {/* Background - same as Home page */}
+          <div className="absolute inset-0 bg-black">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
+          </div>
+          
+          {/* Centered cycling words - hidden when doors appear */}
+          {!showDoors && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+              <h1 
+                key={currentWord}
+                className="text-5xl md:text-8xl lg:text-9xl font-serif font-bold text-white tracking-tighter word-cycle"
+              >
+                {cyclingWords[currentWord]}
+              </h1>
+              <p className="mt-6 md:mt-8 text-sm md:text-lg font-mono text-gray-400 tracking-wider uppercase text-center px-4">
+                AI Speed is Lethal without Governance
+              </p>
+            </div>
+          )}
+
+          {/* Door panels - only visible after word cycling completes */}
+          {showDoors && (
+            <>
+              <div 
+                className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center door-left ${doorsOpen ? 'door-open-left' : ''}`}
+                style={{ backgroundColor: '#1a0a0a' }}
+              >
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white tracking-tighter">
+                  You
+                </span>
+              </div>
+              <div 
+                className={`absolute top-0 right-0 w-1/2 h-full flex items-center justify-center door-right ${doorsOpen ? 'door-open-right' : ''}`}
+                style={{ backgroundColor: '#1a0a0a' }}
+              >
+                <span className="text-6xl md:text-9xl font-serif font-bold text-white tracking-tighter">
+                  Can
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       <nav className="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-500 py-4 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between pointer-events-auto">
@@ -515,8 +631,8 @@ const GovernRxApp = () => {
       {view === "home" && (
         <>
           <header className="relative h-screen flex flex-col justify-center items-center overflow-hidden bg-black text-white px-4">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div ref={heroRef} className="relative z-10 text-center max-w-6xl mx-auto will-change-transform px-2">
               <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] font-serif font-bold tracking-tighter">
@@ -675,8 +791,8 @@ const GovernRxApp = () => {
       {view === "platforms" && (
         <div className="pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-6">The Stack</h1>
@@ -1002,8 +1118,8 @@ const GovernRxApp = () => {
       {view === "vision" && (
         <div className="bg-black pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-4 md:mb-6">
@@ -1372,8 +1488,8 @@ const GovernRxApp = () => {
       {view === "governance" && (
         <div className="bg-black pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-4 md:mb-6">
@@ -1473,8 +1589,8 @@ const GovernRxApp = () => {
       {view === "contact" && (
         <div className="bg-black text-white min-h-screen">
           <div className="relative min-h-[40vh] md:min-h-[60vh] flex items-center overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10 px-4 md:px-24 pt-24 md:pt-32">
 <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-12 md:mb-20">
@@ -1549,9 +1665,9 @@ Inquire
 
       {/* NEW FOOTER - Antigravity Section */}
       <div className="relative overflow-hidden bg-black pt-24 md:pt-40 lg:pt-64 pb-12 md:pb-20 lg:pb-32">
-        {/* Red blur effect matching hero section */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+{/* Red blur effect matching hero section */}
+            <div className="absolute inset-0">
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">

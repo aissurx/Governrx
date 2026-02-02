@@ -345,7 +345,7 @@ const GovernRxApp = () => {
   useEffect(() => {
     if (!showSplash) return
 
-    // Cycle through words every 2.2 seconds, stop at last word
+    // Cycle through words every 2.5 seconds, stop at last word
     let cycleCount = 0
     const wordInterval = setInterval(() => {
       cycleCount++
@@ -354,23 +354,23 @@ const GovernRxApp = () => {
       } else {
         clearInterval(wordInterval)
       }
-    }, 2200)
+    }, 2500)
 
-    // After all 4 words cycle (4 x 2.2s = 8.8s) + pause at "Unchecked" (1.5s), show doors
+    // After all 4 words cycle (4 x 2.5s = 10s) + pause at "Unchecked" (1.5s), show doors
     const showDoorsTimer = setTimeout(() => {
       setShowDoors(true)
-    }, 10300)
+    }, 11500)
 
     // After doors appear (0.3s), trigger door opening animation
     const doorTimer = setTimeout(() => {
       setDoorsOpen(true)
-    }, 10600)
+    }, 11800)
 
     // After doors open (1.5s animation), hide splash completely
     const completeTimer = setTimeout(() => {
       setSplashComplete(true)
       setShowSplash(false)
-    }, 12100)
+    }, 13300)
 
     return () => {
       clearInterval(wordInterval)
@@ -497,7 +497,7 @@ const GovernRxApp = () => {
           85% { opacity: 1; transform: scale(1); }
           100% { opacity: 0; transform: scale(1.02); }
         }
-        .word-cycle { animation: wordFade 2.2s ease-in-out; }
+        .word-cycle { animation: wordFade 2.5s ease-in-out; }
         .door-left {
           transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
         }

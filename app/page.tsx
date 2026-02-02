@@ -521,7 +521,7 @@ const GovernRxApp = () => {
         <div className="fixed inset-0 z-[200] overflow-hidden">
           {/* Background - same as Home page */}
           <div className="absolute inset-0 bg-black">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px] opacity-30"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
           </div>
           
           {/* Centered cycling words - hidden when doors appear */}
@@ -631,8 +631,8 @@ const GovernRxApp = () => {
       {view === "home" && (
         <>
           <header className="relative h-screen flex flex-col justify-center items-center overflow-hidden bg-black text-white px-4">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div ref={heroRef} className="relative z-10 text-center max-w-6xl mx-auto will-change-transform px-2">
               <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] font-serif font-bold tracking-tighter">
@@ -791,8 +791,8 @@ const GovernRxApp = () => {
       {view === "platforms" && (
         <div className="pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-6">The Stack</h1>
@@ -1118,8 +1118,8 @@ const GovernRxApp = () => {
       {view === "vision" && (
         <div className="bg-black pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-4 md:mb-6">
@@ -1488,8 +1488,8 @@ const GovernRxApp = () => {
       {view === "governance" && (
         <div className="bg-black pt-16 md:pt-0">
           <div className="relative bg-black text-white py-24 md:py-32 lg:py-40 px-4 md:px-24 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-4 md:mb-6">
@@ -1589,8 +1589,8 @@ const GovernRxApp = () => {
       {view === "contact" && (
         <div className="bg-black text-white min-h-screen">
           <div className="relative min-h-[40vh] md:min-h-[60vh] flex items-center overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
             </div>
             <div className="relative z-10 px-4 md:px-24 pt-24 md:pt-32">
 <h1 className="text-5xl md:text-6xl lg:text-9xl font-serif font-bold tracking-tighter mb-12 md:mb-20">
@@ -1665,9 +1665,9 @@ Inquire
 
       {/* NEW FOOTER - Antigravity Section */}
       <div className="relative overflow-hidden bg-black pt-24 md:pt-40 lg:pt-64 pb-12 md:pb-20 lg:pb-32">
-        {/* Red blur effect matching hero section */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80vw] h-[80vw] bg-red-700 rounded-full blur-[150px]"></div>
+{/* Red blur effect matching hero section */}
+            <div className="absolute inset-0">
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[100vw] h-[100vw] md:w-[80vw] md:h-[80vw] bg-red-700 rounded-full blur-[100px] md:blur-[150px] opacity-30"></div>
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
